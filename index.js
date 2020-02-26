@@ -4,7 +4,7 @@ const toolCache = require("@actions/tool-cache");
 const path = require("path");
 const fs = require("fs");
 
-const url = "http://gosspublic.alicdn.com/ossutil/1.6.7/ossutil64";
+const url = "http://gosspublic.alicdn.com/ossutil/1.6.7/ossutilmac64";
 
 async function main() {
   const ENDPOINT = core.getInput("endpoint");
@@ -12,7 +12,7 @@ async function main() {
   const ACCESS_KEY_SECRET = core.getInput("access-key-secret");
   const STS_TOKEN = core.getInput("sts-token");
 
-  let toolPath = toolCache.find("ossutil", "1.6.7");
+  let toolPath = toolCache.find("ossutilmac64", "1.6.7");
 
   if (!toolPath) {
     core.info(`downloading from ${url}`);
@@ -27,12 +27,12 @@ async function main() {
     });
   }
 
-  fs.copyFileSync(toolPath, path.join(bin, "ossutil"));
-  fs.chmodSync(path.join(bin, "ossutil"), 0o755);
+  fs.copyFileSync(toolPath, path.join(bin, "ossutilmac64"));
+  fs.chmodSync(path.join(bin, "ossutilmac64"), 0o755);
 
   core.addPath(bin);
 
-  await exec("ossutil", [
+  await exec("ossutilmac64", [
     "config",
     "-e",
     ENDPOINT,
